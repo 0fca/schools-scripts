@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+
+struct MathematicalFuncs{
+public:
+    int sum(int a, int b){
+        return a+b;
+    }
+
+    int substract(int a, int b){
+        return a-b;
+    }
+
+    int multiply(int a, float b){
+        return a*b;
+    }
+
+    void divide(int a, int b){
+        if(a % b == 0){
+            cout<<a/b<<endl;
+        }else{
+            int divide = a/b;
+            int gcd_r = gcd(a,b);
+            int temp = a-(divide*b);
+            if(temp % b == 0){
+                cout<<divide<<temp/gcd_r<<" i "<<"/"<<b<<endl;
+            }else{
+                int gcd_r2 = gcd(temp,b);
+                cout<<divide<<" i "<<temp/gcd_r2<<"/"<<b/gcd_r2<<endl;
+            }
+        }
+    }
+    protected:
+    int gcd(int a, int b){
+        int result = -1;
+
+        while(result != 0){
+            result = a % b;
+            a = b;
+            b = result;
+        }
+        return a;
+    }
+};
+
+
+int main()
+{
+    MathematicalFuncs f;
+    int n;
+    int a,b;
+    while(true){
+    cout<<"n: "<<endl;
+    cin>>n;
+    cout<<"a i b:"<<endl;
+    cin>>a>>b;
+
+    switch(n){
+        case 1:
+            cout<<f.sum(a,b)<<endl;
+            break;
+        case 2:
+            cout<<f.substract(a,b)<<endl;
+            break;
+        case 3:
+            cout<<f.multiply(a,b)<<endl;
+            break;
+        case 4:
+            f.divide(a,b);
+            break;
+    }
+    }
+    return 0;
+}
