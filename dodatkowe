@@ -4,14 +4,59 @@
 using namespace std;
 
 struct Sort{
-private:
 
+public:
+void quicksort(int tablica[], int p, int r){ // sortowanie szybkie{
+    int q;
+    if (p < r)
+    {
+        q = partition(tablica,p,r); // dzielimy tablice na dwie czesci; q oznacza punkt podzialu
+        quicksort(tablica, p, q); // wywolujemy rekurencyjnie quicksort dla pierwszej czesci tablicy
+        quicksort(tablica, q+1, r); // wywolujemy rekurencyjnie quicksort dla drugiej czesci tablicy
+    }
+}
+
+void orderNumbers(int sorted[]){
+    int sizee = sizeof(sorted);
+
+    int *result_set = new int[sizee];
+    int result_set2[sizee] = {};
+
+    for(int it1 = 0; it1<sizee; it1++){
+        int get = sorted[it1];
+        for(int it2 = 0; it2<sizee; it2++){
+            if(get == sorted[it2]){
+                if(!checkIfContains(result_set,get)){
+                     result_set[it2] = get;
+                }
+               result_set2[it1] = result_set2[it1]+1;
+            }
+        }
+
+    }
+
+    int tmp_size = sizeof(result_set);
+    for(int i = 0; i<tmp_size; i++){
+            if(result_set[i] != 0){
+                cout<<result_set[i]<<"   "<<result_set2[i]<<endl;
+            }
+    }
+}
+
+bool checkIfContains(int array_i[],int value){
+    for(int i = 0; i<sizeof(array_i); i++){
+        if(array_i[i] == value)
+            return true;
+    }
+    return false;
+}
+
+private:
 int partition(int tablica[], int p, int r) // dzielimy tablice na dwie czesci, w pierwszej wszystkie liczby sa mniejsze badz rowne x, w drugiej wieksze lub rowne od x
 {
     int x = tablica[p]; // obieramy x
     int i = p, j = r, w; // i, j - indeksy w tabeli
-    while (true) // petla nieskonczona - wychodzimy z niej tylko przez return j
-        {
+    while (true) {// petla nieskonczona - wychodzimy z niej tylko przez return j
         while (tablica[j] > x) // dopoki elementy sa wieksze od x
             j--;
         while (tablica[i] < x) // dopoki elementy sa mniejsze od x
@@ -23,63 +68,34 @@ int partition(int tablica[], int p, int r) // dzielimy tablice na dwie czesci, w
         tablica[j] = w;
         i++;
         j--;
-    }
-        else // gdy i >= j zwracamy j jako punkt podzialu tablicy
+    }else // gdy i >= j zwracamy j jako punkt podzialu tablicy
             return j;
     }
 }
-public:
-void quicksort(int tablica[], int p, int r){ // sortowanie szybkie{
-    int q;
-    if (p < r)
-    {
-        q = partition(tablica,p,r); // dzielimy tablice na dwie czesci; q oznacza punkt podzialu
-        quicksort(tablica, p, q); // wywolujemy rekurencyjnie quicksort dla pierwszej czesci tablicy
-        quicksort(tablica, q+1, r); // wywolujemy rekurencyjnie quicksort dla drugiej czesci tablicy
-    }
-    }
-
-void orderNumbers(int sorted[]){
-    int size = sizeof(sorted)/4;
-    int result_set[] = {};
-    int temp = 0;
-
-    for(int it1 = 0; it1<size; it1++){
-        int get = sorted[it1];
-        for(int it2 = 0; it2<size; it2++){
-            if(get == sorted[it2]){
-                temp += 1;
-            }
-        }
-        result_set[it1] = temp;
-    }
-
-    int tmp_size = sizeof(result_set);
-
-    for(int i = 0; i<tmp_size; i++){
-        cout<<sorted[i]<<result_set[i]<<endl;
-    }
-}
 };
-int main()
-{
-Sort sorter;
-int ilosc_liczb, i;
-srand(time(NULL));
-cout << "Podaj ilosc licz do posortowania: ";
-cin >> ilosc_liczb;
-int *tablica = new int [ilosc_liczb]; // utworzenie dynamicznej tablicy na 'ilosc_liczb' elementow
 
-for (i = 0; i < ilosc_liczb; i++) // wczytywanie liczb do tablicy
-{
-  tablica[i] = rand();
-}
+int main(){
+    Sort sorter;
+    int ilosc_liczb;
+    srand(time(NULL));
+    cout << "Podaj ilosc licz do posortowania: ";
+    cin >> ilosc_liczb;
+    int *tablica = new int [ilosc_liczb]; // utworzenie dynamicznej tablicy na 'ilosc_liczb' elementow
 
-sorter.quicksort(tablica,0,ilosc_liczb-1); // wywolanie funkcji sortujacej
-sorter.orderNumbers(tablica);
+    cout<<"Przesortowany set kontrolny:"<<endl;
+    for (int i = 0; i < ilosc_liczb; i++) // wczytywanie liczb do tablicy
+    {
+        tablica[i] = rand() % 10 + 1;
+    }
 
+    sorter.quicksort(tablica,0,ilosc_liczb-1); // wywolanie funkcji sortujacej
+    for(int i = 0; i<sizeof(tablica); i++){
+        cout<<tablica[i]<<endl;
+    }
+    cout<<endl;
+    sorter.orderNumbers(tablica);
 
-delete [] tablica; // zwolnienie tablicy zaalokowanej dynamicznie
+    delete [] tablica; // zwolnienie tablicy zaalokowanej dynamicznie
 
-return 0;
+    return 0;
 }
