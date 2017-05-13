@@ -88,6 +88,8 @@ int main()
                 m.fromDecToHex(conv2);
                 cout<<endl;
                 break;
+            case 3:
+                break;
         }
     }
     return 0;
