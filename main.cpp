@@ -13,6 +13,21 @@ struct Math{
         return tmp;
     }
 
+    int from28ToDec(char buf[], int system){
+        int res = 0;
+
+        for(int i = sizeof(buf); i >= 0; i--){
+            int get = (int)(buf[i]-48);
+            if(get < system & get >= 0){
+                    if(get != 0){
+                        res += pow(system,i)*get;
+                        cout<<res<<endl;
+                    }
+            }
+        }
+        return res;
+    }
+
     int fromDecTo29(int conv,int system){
         int div_res = 0 ,rest = 0;
         int tmp[10] = {0};
@@ -89,6 +104,11 @@ int main()
                 cout<<endl;
                 break;
             case 3:
+                char buf[8];
+                int system2;
+                cin>>buf;
+                cin>>system2;
+                cout<<m.from28ToDec(buf,system2)<<endl;
                 break;
         }
     }
