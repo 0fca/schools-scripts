@@ -119,7 +119,9 @@ int main()
             case 3:
                 char buf[8];
                 int system2;
+                cout<<"Podaj sekwencję:"<<endl;
                 cin>>buf;
+                cout<<"Podaj system: "<<endl;
                 cin>>system2;
                 cout<<m.from28ToDec(buf,system2)<<endl;
                 break;
