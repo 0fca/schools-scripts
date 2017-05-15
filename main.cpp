@@ -15,14 +15,27 @@ struct Math{
 
     int from28ToDec(char buf[], int system){
         int res = 0;
+        int index = -1;
+        int int_buf[8] = {0};
 
-        for(int i = sizeof(buf); i >= 0; i--){
-            int get = (int)(buf[i]-48);
-            if(get < system & get >= 0){
-                    if(get != 0){
-                        res += pow(system,i)*get;
-                        cout<<res<<endl;
-                    }
+        for(int i = 0; i < sizeof(buf); i++){
+            int get = (int)(buf[i]);
+            //cout<<get<<endl;
+            if(get <= 56 & get >= 48){
+                index++;
+                int_buf[i] = get;
+                //cout<<get<<endl;
+            }
+
+        }
+
+        for(int it = 0; it < sizeof(buf); it++){
+            int get2 = (int)(int_buf[it]-48);
+
+            if(get2 < system & get2 >= 0){
+                //cout<<pow(system,index)*get2<<"\t:\t"<<index<<"\t:\t"<<get2<<endl;
+                res+= pow(system,index)*get2;
+                index--;
             }
         }
         return res;
