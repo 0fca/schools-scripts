@@ -40,17 +40,13 @@ struct Math{
                 if(get2 <=70 & get2 >= 65){
                     cout<<pow(system,index)*get2<<"\t:\t"<<index<<"\t:\t"<<get2<<endl;
                     get2 = get2 - 55;
-                    res += pow(system,index)*get2;
-                    index--;
                 }else{
                     if(get2 <= 56 & get2 >= 48){
                         get2 = get2 - 48;
-                        res += pow(system,index)*get2;
-                        index--;
                     }
                 }
-
-
+                res += pow(system,index)*get2;
+                index--;
         }
 return res;
     }
@@ -62,7 +58,7 @@ return res;
 
         while(conv != 0){
             div_res = conv/system;
-            rest = conv-(div_res*system);
+            rest = conv%system;
             conv = div_res;
             tmp[index] = rest;
             index++;
