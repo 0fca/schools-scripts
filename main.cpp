@@ -25,20 +25,34 @@ struct Math{
                 index++;
                 int_buf[i] = get;
                 //cout<<get<<endl;
+            }else{
+                if(get <= 70 & get >= 65){
+                    index++;
+                    int_buf[i] = get;
+                }
             }
 
         }
 
         for(int it = 0; it < sizeof(buf); it++){
-            int get2 = (int)(int_buf[it]-48);
+            int get2 = (int)(int_buf[it]);
 
-            if(get2 < system & get2 >= 0){
-                //cout<<pow(system,index)*get2<<"\t:\t"<<index<<"\t:\t"<<get2<<endl;
-                res+= pow(system,index)*get2;
-                index--;
-            }
+                if(get2 <=70 & get2 >= 65){
+                    cout<<pow(system,index)*get2<<"\t:\t"<<index<<"\t:\t"<<get2<<endl;
+                    get2 = get2 - 55;
+                    res += pow(system,index)*get2;
+                    index--;
+                }else{
+                    if(get2 <= 56 & get2 >= 48){
+                        get2 = get2 - 48;
+                        res += pow(system,index)*get2;
+                        index--;
+                    }
+                }
+
+
         }
-        return res;
+return res;
     }
 
     int fromDecTo29(int conv,int system){
