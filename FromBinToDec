@@ -4,30 +4,26 @@
 using namespace std;
 
 struct Math{
-    void fromBinToDec(int pozycja, char dana[]){
-        pozycja = -1;
-        int tmp = 0;
+    void fromBinToDec(char dana[]){
+        int pozycja = -1;
+        int tmp = sizeof(dana)/2;
         int res = 0, res2 = 0;
 
         for(int i = 0; i <= sizeof(dana); i++){
             char get = dana[i];
-
             if((int)get == 44 | (int)get == 46){
                pozycja = i;
             }
-
-            for(int i2 = (pozycja-1); i2 >= 0; i2--){
-               int get = ((int)dana[i2] - 48);
-               res += pow(2,tmp)*get;
-               tmp += 1;
-            }
-            tmp = 0;
-            for(int i3 = (pozycja+1); i3 < 10; i3++){
-                int get = ((int)dana[i3] - 48);
-                res2 += pow(2,tmp)*get;
-                tmp -= 1;
-            }
         }
+
+        for(int i = 0; i < sizeof(dana); i++){
+            if(i < pozycja| i > pozycja){
+                int get = ((int)dana[i] - 48);
+                res += pow(2,tmp)*get;
+            }
+            tmp -= 1;
+        }
+
         cout<<res<<"."<<res2<<endl;
     }
 };
@@ -36,9 +32,8 @@ struct Math{
 int main()
 {
     Math m;
-    int pozycja;
     char dana[10];
     cin>>dana;
-    m.fromBinToDec(pozycja, dana);
+    m.fromBinToDec(dana);
     return 0;
 }
