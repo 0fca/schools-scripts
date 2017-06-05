@@ -3,11 +3,12 @@
 
 using namespace std;
 
+
 struct Math{
     void fromBinToDec(char dana[]){
         int pozycja = -1;
-        int tmp = sizeof(dana)/2;
-        int res = 0, res2 = 0;
+        int res = 0;
+        float res2 = 0;
 
         for(int i = 0; i <= sizeof(dana); i++){
             char get = dana[i];
@@ -16,15 +17,20 @@ struct Math{
             }
         }
 
+        int tmp = pozycja-1;
         for(int i = 0; i < sizeof(dana); i++){
-            if(i < pozycja| i > pozycja){
-                int get = ((int)dana[i] - 48);
-                res += pow(2,tmp)*get;
-            }
-            tmp -= 1;
-        }
+            int get = ((int)dana[i] - 48);
+            if(i < pozycja){
+                res += (pow(2,tmp)*get);
+                tmp -= 1;
 
-        cout<<res<<"."<<res2<<endl;
+            }else if(pozycja < i){
+                res2 += (pow(2,tmp)*get);
+                tmp -= 1;
+            }
+
+        }
+        cout<<res+res2<<endl;
     }
 };
 
