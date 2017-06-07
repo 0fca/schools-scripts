@@ -33,38 +33,36 @@ printf("\nTablica po posortowaniu:");
 }
 
 void orderNumbers(int sorted[], int sizee){
-    cout<<sizee<<endl;
+    //cout<<sizee<<endl;
     int result_set[sizee] = {0};
     int result_set2[sizee] = {0};
-    int maximum = 0;
 
     for(int it1 = 0; it1<sizee; it1++){
         int get = sorted[it1];
         for(int it2 = 0; it2<sizee; it2++){
             if(get == sorted[it2]){
-                if(!checkIfContains(result_set,get)){
+                if(!checkIfContains(result_set,get,sizee)){
                      result_set[it2] = get;
 
                 }
-               result_set2[it1] = result_set2[it1]+1;
-               if(maximum < result_set2[it1]){
-                        maximum = result_set2[it1];
-               }
+                result_set2[it1] = result_set2[it1]+1;
             }
         }
 
     }
 
     int tmp_size = sizee;
-    for(int i = 0; i<tmp_size; i+=maximum){
+    cout<<"RS : "<<sizeof(result_set)<<endl;
+    for(int i = 0; i<tmp_size; i++){
             if(result_set[i] != 0){
                 cout<<result_set[i]<<"   "<<result_set2[i]<<endl;
+                i = i + (result_set2[i]-1);
             }
     }
 }
 
-bool checkIfContains(int array_i[],int value){
-    for(int i = 0; i<sizeof(array_i); i++){
+bool checkIfContains(int array_i[],int value,int ilosc){
+    for(int i = 0; i<ilosc; i++){
         if(array_i[i] == value)
             return true;
     }
