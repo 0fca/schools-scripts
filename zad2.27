@@ -1,0 +1,25 @@
+int main()
+{
+ int bin[16],a=0;
+ unsigned int dec;
+ int n, c;
+ cout<<tr("Podaj ile bitów ma n (8 lub 16): "); cin>>n;
+ cout<<tr("Podaj liczbę: "); cin>>c;
+
+dec = pow(2,n) + c;
+
+while (dec>0)
+{
+    bin[a]=dec%2;
+    dec=dec/2;
+    a++;
+}
+
+
+for (int i=(a-1);i>=0;i--)
+{ cout<<bin[i];
+if (i==8) {cout<<",";};
+}
+
+return 0;
+}
