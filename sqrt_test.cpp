@@ -1,3 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   main.c
+ * Author: obsidiam
+ *
+ * Created on October 21, 2017, 7:31 PM
+ */
+
 
 #include <cmath>
 #include <cstdlib>
@@ -31,11 +44,11 @@ float field(float a, float b,float deltares){
     return ((a + b)/2) * deltares;
 }
 
-float function2(int x){
-    return ((-pow(x,2)) + 4);
+float function2(float x){
+    return (-pow(x,2) + 4);
 }
 
-float function(int x){
+float function(float x){
     return (pow(x,2) - 4);
 }
 
@@ -46,7 +59,7 @@ float delta(float x1, float x2, float n){
 }
 
 int main(int argc, char** argv) {
-    float x1,x2,n,a,b;
+    float x1,x2,n,a = 0,b = 0;
     std::cin>>x1;
     std::cin>>x2;
     std::cin>>n;
@@ -56,8 +69,8 @@ int main(int argc, char** argv) {
     float result = 0;
     
     for(float i = x1; i < x2; i += deltares){
-        a = function2(i);// - function(i);
-        b = function2(i + deltares);//- function(i + deltares);
+        a = function2(i)  - function(i);
+        b = function2(i + deltares) - function(i + deltares);
         result += field(a,b,deltares);
     }
     std::cout<<result<<std::endl;
@@ -68,3 +81,4 @@ int main(int argc, char** argv) {
 */
     return 0;
 }
+
