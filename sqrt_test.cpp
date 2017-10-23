@@ -1,70 +1,70 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/* 
- * File:   main.cpp
- * Author: obsidiam
- *
- * Created on September 23, 2017, 4:52 PM
- */
-
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
-#include <cmath>
 
-
-/*
- * 
- */
-
-float F(double x){
-    return pow(x,2) - x - 3;
-}
-
-double calculate (double p, double q, int n){
-    double dl = (q - p)/n, s = 0;
-    for(int i = 1; i < n; i++){
-        s += abs(F(p + i * dl));
+float sqrt(float x){
+    float a = x, b = 1, result = x, epsilon = 0.0000001f;
+    
+    while(true){
+        result = (result + b)/2;
+        b = a/result;
+        if((result - b) < epsilon) break;
     }
-    return dl/2 * (abs(F(p))) + abs(F(q) + 2*s);
+    return b;
 }
 
+float cubrt(float x){
+    float a = x, b = 1, c = 1, result = x;
+    
+    while(true){
+        result =  (result + b + c)/3;
+        b = result;
+        c = (a - b)/ result ;
+        if((b - c) < 0.00000001f) break;
+    }
+    
+    return c;
+}
+
+float field(float a, float b,float deltares){
+    return ((a + b)/2) * deltares;
+}
+
+float function2(int x){
+    return ((-pow(x,2)) + 4);
+}
+
+float function(int x){
+    return (pow(x,2) - 4);
+}
+
+float delta(float x1, float x2, float n){
+    if(x1 > x2) return 0;
+    
+    return (x2 - x1)/n;
+}
 
 int main(int argc, char** argv) {
-    int in;
-    std::cin>>in;
-    switch(in){
-        case 1:{
-            float a,b = 1.f,result = 0;
-            std::cout<<"Podaj liczbę do pierwiastkowania: "<<std::endl;
-            std::cin>>a;
-            result = a;
-            while(true){
-                result = (result + b)/2;
-                b = a/result; 
-
-                if((result - b) < 0.00001f) break;
-            }
-            std::cout<<"Wynik: "<<b;
-        }
-        break;
-        case 2:{
-            double p,q;
-            int n;
-            std::cin>>p;
-            std::cin>>q;
-            std::cin>>n;
-            std::cout<<calculate(p,q,n);
-            break;
-        }
+    float x1,x2,n,a,b;
+    std::cin>>x1;
+    std::cin>>x2;
+    std::cin>>n;
+    
+    float deltares = delta(x1,x2,n);
+    std::cout<<deltares<<std::endl;
+    float result = 0;
+    
+    for(float i = x1; i < x2; i += deltares){
+        a = function2(i);// - function(i);
+        b = function2(i + deltares);//- function(i + deltares);
+        result += field(a,b,deltares);
     }
+    std::cout<<result<<std::endl;
+/*
+    float num;
+    std::cin>>num;
+    std::cout<<cubrt(num)<<std::endl;
+*/
     return 0;
 }
-
-
-
-
-
