@@ -1,8 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   strings_test.cpp
+ * Author: obsidiam
+ *
+ * Created on November 6, 2017, 6:00 PM
+ */
+
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
 
 using namespace std;
+
+int getFactorial( int dest){
+    int result = 1;
+    
+    for(int i = 1; i <= dest; i++){
+        result *= i;
+    }
+    return result;
+}
+
+string generateAnagram(string seq){
+    int factorial = getFactorial(seq.size());
+    
+    for(int i = 1; i < factorial; i++){
+        result += seq[i + (i % seq.size())];
+        
+        if(i % seq.size() == (seq.size() - 1)) result += '\n' ;
+    }
+    
+    cout<<result<<endl;
+    return "";
+}
 
 string removeSpace(string s){
     string result = "";
@@ -17,27 +52,30 @@ string removeSpace(string s){
 
 int main(int argc, char** argv)
 {
-    string s1 = "", st1 = "", st2 = "";
-    getline(cin,s1);
-
-    s1 = removeSpace(s1);
-
-    cout<<s1<<endl;
-    
-    bool isOk = true;
-    for(int i = 1; i <= (s1.size()/2); i++){
-        st1 = s1.at(i - 1);
-        st1 = tolower(st1[0]);
-        st2 = s1.at(s1.size() - i);
-        st2 = tolower(st2[0]);
-        
-        if(st1 != st2){
-            cout<<"Niezgodne!"<<endl;
-            isOk = false;
-            break;
-        }
-    }
-
-    if(isOk) cout<<"Zgodne"<<endl;
+    generateAnagram("lelellel");
+//    string s1 = "", st1 = "", st2 = "";
+//    getline(cin,s1);
+//
+//    s1 = removeSpace(s1);
+//
+//    
+//    bool isOk = true;
+//    for(int i = 1; i <= (s1.size()/2); i++){
+//        st1 = s1.at(i - 1);
+//        st1 = tolower(st1[0]);
+//        st2 = s1.at(s1.size() - i);
+//        st2 = tolower(st2[0]);
+//        
+//        if(st1 != st2){
+//            cout<<"Niezgodne!"<<endl;
+//            isOk = false;
+//            break;
+//        }
+//    }
+//
+//    if(isOk) cout<<"Zgodne"<<endl;
     return 0;
 }
+
+
+
