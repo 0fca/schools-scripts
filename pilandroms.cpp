@@ -22,14 +22,6 @@ using namespace std;
  * 
  */
 
-string rTrimString(string to){
-    string res;
-    for(int i = 0; i <= to.size() - 1; i++){
-        res += to[i];
-    }
-    return res;
-}
-
 string removeSpace(string s){
     string result = "";
     for(int i = 0; i < s.size(); i++){
