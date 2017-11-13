@@ -22,6 +22,13 @@ using namespace std;
  * 
  */
 
+char toLowerCase(char c){
+        if(c >= 65 && c <= 90)
+            c += 32;
+  
+    return c;
+}
+
 string removeSpace(string s){
     string result = "";
     for(int i = 0; i < s.size(); i++){
@@ -42,9 +49,9 @@ bool isPilandrom(string s1){
     bool isOk = true;
     for(int i = 1; i <= (s1.size()/2); i++){
         st1 = s1.at(i - 1);
-        st1 = tolower(st1[0]);
+        st1 = toLowerCase(st1[0]);
         st2 = s1.at(s1.size() - i);
-        st2 = tolower(st2[0]);
+        st2 = toLowerCase(st2[0]);
         
         if(st1 != st2){
             isOk = false;
@@ -61,6 +68,7 @@ int main(int argc, char** argv) {
     
     std::string str; 
     string result;
+
     
     while (!inputFile.eof())
     {
